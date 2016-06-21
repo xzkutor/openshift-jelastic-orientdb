@@ -69,9 +69,14 @@ else
 fi
 export JAVA
 
+if [ -e ./variablesparser.sh ]; then
+      . ./variablesparser.sh
+fi
+
 LOG_FILE=$ORIENTDB_HOME/config/orientdb-server-log.properties
 WWW_PATH=$ORIENTDB_HOME/www
 ORIENTDB_SETTINGS="-Dprofiler.enabled=true"
-JAVA_OPTS_SCRIPT="-Djna.nosys=true -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -Dfile.encoding=UTF8 -Drhino.opt.level=9 -Xmx2048m -Xms256m"
+JAVA_OPTS_SCRIPT="-Djna.nosys=true -XX:+HeapDumpOnOutOfMemoryError -Djava.net.preferIPv4Stack=true -Djava.awt.headless=true -Dfile.encoding=UTF8 -Drhino.opt.level=9"
 
 $JAVA $JAVA_OPTS $JAVA_OPTS_SCRIPT $ORIENTDB_SETTINGS -Djava.net.preferIPv4Stack=true -Djava.util.logging.config.file="$LOG_FILE" -Dorientdb.config.file="$CONFIG_FILE" -Dorientdb.www.path="$WWW_PATH" -Dorientdb.build.number="UNKNOWN@r${buildNumber}; 2014-06-23 19:29:10+0200" -cp "$ORIENTDB_HOME/lib/orientdb-server-1.7.4.jar:$ORIENTDB_HOME/lib/*" com.orientechnologies.orient.server.OServerMain
+
